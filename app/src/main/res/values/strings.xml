@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">nofinal</string>
+    <string name="ss">ss</string>
+    <string name="todo7">TODO</string>
+    <string name="w">w未登录</string>
+    <string name="todo1">TODO</string>
+    <string name="todo2">TODO</string>
+    <string name="resove">我的收藏</string>
+    <string name="todo3">TODO</string>
+    <string name="missmessage">未读信息</string>
+    <string name="todo4">TODO</string>
+    <string name="set">设置</string>
+    <string name="todo5">TODO</string>
+    <string name="lixian">离线缓存</string>
+    <string name="todo6">TODO</string>
+    <string name="nigh">夜间模式</string>
+    <string name="drawer_open">开</string>
+    <string name="drawer_close">关</string>
+    <string name="request_data_waiting">正在加载...</string>
+    <string name="title_activity_web">webActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="type">评论类型</string>
+    <string name="username">用户名</string>
+    <string name="todo">TODO</string>
+    <string name="comment">评论内容</string>
+    <string name="_8">8</string>
+    <string name="nodata">没有可用消息</string>
+    <string name="_10">10</string>
+</resources>
