@@ -10,9 +10,6 @@ import android.os.Message;
 import com.example.nofinal.R;
 
 
-/**
- * Created by liu kun on 2017/10/23 0023.
- */
 
 public class SubscriberHandler extends Handler {
     public static final int SEND_MESSAGE = 11;

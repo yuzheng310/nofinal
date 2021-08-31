@@ -53,6 +53,9 @@ public class webActivity extends AppCompatActivity {
         TextView textView = findViewById(R.id.web_title);
         textView.setText(intent.getStringExtra("story_title"));
         ImageView imageView = findViewById(R.id.web_image);
+        /*
+         * 下载图片
+         */
         Glide.with(this)
                 .load(intent.getStringExtra("story_imag"))
                 .into(imageView);
@@ -84,13 +87,13 @@ public class webActivity extends AppCompatActivity {
         nestedScrollView=findViewById(R.id.nestedScrollView);
         nestedScrollView.setOnScrollChangeListener((View.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
             if (scrollY>1650){
-                Log.v("HEHE", "scrollY"+scrollY);
+                Log.v("23100", "scrollY"+scrollY);
                 if (flag){
                 floatingActionButton.setVisibility(View.VISIBLE);
                 flag=false;
                 }
             }
-            else {Log.v("HEHE","scrollY"+scrollY);
+            else {Log.v("23100","scrollY"+scrollY);
             if (!flag){
             floatingActionButton.setVisibility(View.INVISIBLE);
             flag=true;
