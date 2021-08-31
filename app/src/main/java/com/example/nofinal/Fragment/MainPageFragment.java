@@ -48,6 +48,16 @@ import java.util.Objects;
   * 代码基本完工但是现在存在一些漏洞详见MainActivity
   * update 2021.8.16
   * by     yuzheng
+  *
+  * *****************************************
+  * 解决了头部视图在轮播完一圈以后点击头部视图的新闻会导致闪退
+  * 原因：导致的原因是实现头部视窗无限自动轮播时itemid在不断向上加（这是自己设置的模式即无限item）但是又因为新闻的数量是有限的所以当第二轮访问
+  * 到新闻的各项数组时就会发生数组的下标越界的情况
+  * 解决方法：下标改为currentItem%storyidArray.length头部视图的各项数据都要进行类似的改动
+  *
+  * update 2021.8.31
+  *
+  * by yuzheng
   */
 public class MainPageFragment extends BaseFragment{
     private forstand forstand=new forstand();
@@ -233,14 +243,18 @@ public class MainPageFragment extends BaseFragment{
                          break;
                      case MotionEvent.ACTION_UP:
                          if (touchFlag == 0) {
+                             try {
                              int currentItem = vp.getCurrentItem();
                              Intent it = new Intent();
                              it.setClass(getActivity(), webActivity.class);
-                             it.putExtra("story_id",storyidArray[currentItem]);
-                             it.putExtra("story_url",StotruriArray[currentItem]);
-                             it.putExtra("story_title",titleArray[currentItem]);
-                             it.putExtra("story_imag",imageIdArray[currentItem]);
-                             startActivity(it);
+                             it.putExtra("story_id",storyidArray[currentItem%storyidArray.length]);
+                             it.putExtra("story_url",StotruriArray[currentItem% StotruriArray.length]);
+                             it.putExtra("story_title",titleArray[currentItem%titleArray.length]);
+                             it.putExtra("story_imag",imageIdArray[currentItem%imageIdArray.length]);
+                             startActivity(it);}
+                             catch (Exception e){
+                                 e.printStackTrace();
+                             }
                          }
                          break;
                  }
