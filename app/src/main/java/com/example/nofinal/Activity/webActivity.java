@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import com.bumptech.glide.Glide;
+import com.example.nofinal.bean.CollectionBean;
+import com.example.nofinal.dosql.DB.DBDao;
 import com.example.nofinal.webul.MyWebView;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,10 +28,16 @@ import androidx.core.widget.NestedScrollView;
 import com.example.nofinal.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Objects;
 
 public class webActivity extends AppCompatActivity {
     private String stry_id;
+    private String story_title;
+    private String story_imag;
+    private String story_url;
+    private String date;
     private boolean flag=false;
     private MyWebView wView;
     private NestedScrollView nestedScrollView;
@@ -52,6 +60,9 @@ public class webActivity extends AppCompatActivity {
         toolbar.setNavigationIcon(R.drawable.ic_baseline_home_24);
         TextView textView = findViewById(R.id.web_title);
         textView.setText(intent.getStringExtra("story_title"));
+        story_title=intent.getStringExtra("story_title");
+        story_imag=intent.getStringExtra("story_imag");
+        story_url=intent.getStringExtra("story_url");
         ImageView imageView = findViewById(R.id.web_image);
         /*
          * 下载图片
@@ -157,6 +168,14 @@ public class webActivity extends AppCompatActivity {
             case android.R.id.home:
                 Toast.makeText(this,"首页",Toast.LENGTH_SHORT).show();
                 finish();
+                break;
+            case R.id.action_souchang:
+                SimpleDateFormat formatter=new   SimpleDateFormat   ("yyyy年MM月dd日HH:mm:ss");
+                Date curDate =  new Date(System.currentTimeMillis());
+                date=formatter.format(curDate);
+                CollectionBean collectionBean=new CollectionBean(story_title,story_imag,story_url,date);
+                DBDao.getInstance().insert(collectionBean);
+                Toast.makeText(this,"收藏成功",Toast.LENGTH_SHORT).show();
                 break;
         }
         return true;

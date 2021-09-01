@@ -10,6 +10,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
+        android:name=".Activity.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -18,10 +19,11 @@
         android:theme="@style/Theme.Nofinal"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
+        <activity android:name=".Activity.CollectionActivity"></activity>
         <activity
             android:name=".Activity.webActivity"
             android:label="@string/title_activity_web"
-            android:theme="@style/Theme.Nofinal.NoActionBar"></activity>
+            android:theme="@style/Theme.Nofinal.NoActionBar" />
         <activity android:name=".Activity.MainActivity" />
         <activity android:name=".Activity.pinlunActivity" />
         <activity android:name=".Activity.StartPageActivity">
