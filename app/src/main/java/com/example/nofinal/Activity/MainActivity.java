@@ -2,13 +2,18 @@ package com.example.nofinal.Activity;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -20,6 +25,7 @@ import com.example.nofinal.R;
 import com.example.nofinal.bean.HostProjectBean;
 import com.example.nofinal.bean.LastProjectBean;
 import com.example.nofinal.bean.forstand;
+import com.google.android.material.navigation.NavigationView;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import java.io.Serializable;
@@ -122,6 +128,38 @@ public class MainActivity extends AppCompatActivity implements Serializable {
         actionBarDrawerToggle.syncState();
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         initContentFragment();
+        NavigationView navigationView=findViewById(R.id.navigationView);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.group_item_github:
+                        Toast.makeText(MainActivity.this,"项目主页",Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.group_item_more:
+                        Toast.makeText(MainActivity.this,"更多内容",Toast.LENGTH_SHORT).show();
+                        Intent it = new Intent();
+                        it.setClass(getApplicationContext(), CollectionActivity.class);
+                        startActivity(it);
+                        break;
+                    case R.id.group_item_qr_code:
+                        Toast.makeText(MainActivity.this,"二维码",Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.group_item_share_project:
+                        Toast.makeText(MainActivity.this,"分享项目",Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.item_model:
+                        Toast.makeText(MainActivity.this,"夜间模式",Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.item_about:
+                        Toast.makeText(MainActivity.this,"关于",Toast.LENGTH_SHORT).show();
+                        break;
+                }
+                item.setCheckable(false);
+                drawerLayout.closeDrawer(GravityCompat.START);
+                return true;
+            }
+        });
     }
     @SuppressLint("RestrictedApi")
     private void initContentFragment() {

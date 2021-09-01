@@ -5,11 +5,13 @@ public class CollectionBean {
     private String story_imag;
     private String story_url;
     private String date;//收藏时间
-    public CollectionBean(String story_title,String story_imag, String story_url,String date) {
+    private String id;
+    public CollectionBean(String story_title,String story_imag, String story_url,String date,String id) {
         this.story_title = story_title;
         this.story_imag = story_imag;
         this.story_url = story_url;
         this.date = date;
+        this.id=id;
     }
     public CollectionBean() {
     }
@@ -44,5 +46,13 @@ public class CollectionBean {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

@@ -173,7 +173,7 @@ public class webActivity extends AppCompatActivity {
                 SimpleDateFormat formatter=new   SimpleDateFormat   ("yyyy年MM月dd日HH:mm:ss");
                 Date curDate =  new Date(System.currentTimeMillis());
                 date=formatter.format(curDate);
-                CollectionBean collectionBean=new CollectionBean(story_title,story_imag,story_url,date);
+                CollectionBean collectionBean=new CollectionBean(story_title,story_imag,story_url,date,stry_id);
                 DBDao.getInstance().insert(collectionBean);
                 Toast.makeText(this,"收藏成功",Toast.LENGTH_SHORT).show();
                 break;

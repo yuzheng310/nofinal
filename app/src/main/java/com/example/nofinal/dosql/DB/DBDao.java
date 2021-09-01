@@ -22,6 +22,7 @@ public class DBDao {
     private static final String URL = "story_url";//年龄
     private static final String DATE = "date";//性别
     private static final String ID = "id";//id自增长
+    private static final String SID = "story_id";//id自增长
     private DBHelper dbHelper;
     //创建表结构
     public static final String SQL_CREATE_TABLE = "create table " + TABLE_NAME + "(" +
@@ -29,7 +30,8 @@ public class DBDao {
             TITLE + " text," +
             IMAG + " Nvarchar(255)," +
             URL + " Nvarchar(255)," +
-            DATE + " text" +
+            DATE + " text," +
+            SID+" text"+
             ")";
 
 
@@ -44,7 +46,6 @@ public class DBDao {
     private static class InnerDB {
         private static DBDao instance = new DBDao();
     }
-
     /**
      * 数据库插入数据
      *
@@ -61,6 +62,7 @@ public class DBDao {
                 cv.put(IMAG, collectionBean.getStory_imag());
                 cv.put(URL, collectionBean.getStory_url());
                 cv.put(DATE, collectionBean.getDate());
+                cv.put(SID,collectionBean.getId());
                 db.insert(TABLE_NAME, null, cv);
             }
         } catch (Exception e) {
@@ -104,6 +106,7 @@ public class DBDao {
                 collectionBean.setStory_imag(cursor.getString(cursor.getColumnIndex(IMAG)));
                 collectionBean.setStory_url(cursor.getString(cursor.getColumnIndex(URL)));
                 collectionBean.setDate(cursor.getString(cursor.getColumnIndex(DATE)));
+                collectionBean.setId(cursor.getString(cursor.getColumnIndex(SID)));
                 list.add((T) collectionBean);
             }
         } catch (Exception e) {
