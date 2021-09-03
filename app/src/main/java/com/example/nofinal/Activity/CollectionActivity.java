@@ -18,6 +18,7 @@ import com.example.nofinal.bean.CollectionBean;
 import com.example.nofinal.dosql.DB.DBDao;
 
 import java.text.SimpleDateFormat;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -30,8 +31,9 @@ public class CollectionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_collection_bean);
-        context=getApplicationContext();
+        context=CollectionActivity.this;
         stort=DBDao.getInstance().query();
+        Collections.reverse(stort);
         newsrcyAdapter=new collectionAdapter(stort,context);
         RecyclerView rv = findViewById(R.id.rv);
         rv.setLayoutManager(new LinearLayoutManager(getApplicationContext()));

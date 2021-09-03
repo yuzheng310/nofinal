@@ -1,7 +1,11 @@
 package com.example.nofinal.Activity;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -135,6 +139,24 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                 switch (item.getItemId()) {
                     case R.id.group_item_github:
                         Toast.makeText(MainActivity.this,"项目主页",Toast.LENGTH_SHORT).show();
+                        AlertDialog alert = null;
+                        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                        alert = null;
+                        builder = new AlertDialog.Builder(MainActivity.this);
+                        alert = builder.setIcon(R.mipmap.back)
+                                .setTitle("GitHub地址：")
+                                .setMessage("https://github.com/yuzheng310/nofinal\n点击按键复制")
+                                .setNegativeButton("复制", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        //获取剪贴板管理器：
+                                        ClipboardManager cm = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);// 创建普通字符型ClipData
+                                        ClipData mClipData = ClipData.newPlainText("Label", "https://github.com/yuzheng310/nofinal\n");// 将ClipData内容放到系统剪贴板里。
+                                        cm.setPrimaryClip(mClipData);
+                                        Toast.makeText(MainActivity.this, "你点击了复制按钮~", Toast.LENGTH_SHORT).show();
+                                    }
+                                }).create();             //创建AlertDialog对象
+                        alert.show();                    //显示对话框
                         break;
                     case R.id.group_item_more:
                         Toast.makeText(MainActivity.this,"更多内容",Toast.LENGTH_SHORT).show();
@@ -142,17 +164,25 @@ public class MainActivity extends AppCompatActivity implements Serializable {
                         it.setClass(getApplicationContext(), CollectionActivity.class);
                         startActivity(it);
                         break;
-                    case R.id.group_item_qr_code:
-                        Toast.makeText(MainActivity.this,"二维码",Toast.LENGTH_SHORT).show();
-                        break;
-                    case R.id.group_item_share_project:
-                        Toast.makeText(MainActivity.this,"分享项目",Toast.LENGTH_SHORT).show();
-                        break;
                     case R.id.item_model:
-                        Toast.makeText(MainActivity.this,"夜间模式",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this,"并没有夜间模式",Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.item_about:
                         Toast.makeText(MainActivity.this,"关于",Toast.LENGTH_SHORT).show();
+                        AlertDialog alert2 = null;
+                        AlertDialog.Builder builder2 = new AlertDialog.Builder(context);
+                        alert2 = null;
+                        builder2 = new AlertDialog.Builder(MainActivity.this);
+                        alert2 = builder2.setIcon(R.mipmap.back)
+                                .setTitle("关于：")
+                                .setMessage("这是一个仿知乎日报的APP，所有资源来自网络,欢迎点击项目主页下载源码。")
+                                .setNegativeButton("确定", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        Toast.makeText(MainActivity.this, "你点击了确定按钮~", Toast.LENGTH_SHORT).show();
+                                    }
+                                }).create();             //创建AlertDialog对象
+                        alert2.show();                    //显示对话框
                         break;
                 }
                 item.setCheckable(false);

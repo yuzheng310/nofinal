@@ -8,15 +8,7 @@
         <item
             android:id="@+id/group_item_more"
             android:icon="@drawable/ic_vector_more"
-            android:title="更多内容" />
-        <item
-            android:id="@+id/group_item_qr_code"
-            android:icon="@drawable/ic_vector_qr_code"
-            android:title="二维码" />
-        <item
-            android:id="@+id/group_item_share_project"
-            android:icon="@drawable/ic_vector_share"
-            android:title="分享项目" />
+            android:title="我的收藏" />
     </group>
     <item android:title="选项">
         <menu>

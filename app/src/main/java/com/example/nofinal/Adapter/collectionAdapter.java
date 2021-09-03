@@ -1,7 +1,8 @@
 package com.example.nofinal.Adapter;
 
-import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,12 +10,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.nofinal.Activity.webActivity;
 import com.example.nofinal.R;
 import com.example.nofinal.bean.CollectionBean;
+import com.example.nofinal.dosql.DB.DBDao;
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.List;
 
     // ① 创建Adapter
@@ -68,16 +72,37 @@ public class collectionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.v("MainActivity","rcDIANJI"+position);
-                    CollectionBean story = stories.get(position);
-                    Intent intent = new Intent();
-                    intent.putExtra("story_title",story.getStory_title());
-                    intent.putExtra("story_imag",story.getStory_imag());
-                    intent.putExtra("story_url", story.getStory_url());
-                    intent.putExtra("story_id",story.getId());
-                    intent.setClass(context,webActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK );
-                    context.startActivity(intent);
+                    AlertDialog alert = null;
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                    final String[] lesson = new String[]{"打开这个新闻", "删除这个新闻"};
+                    alert = builder.setIcon(R.mipmap.back)
+                            .setTitle("请选择您要进行的操作")
+                            .setItems(lesson, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Toast.makeText(context, "你选择了" + lesson[which], Toast.LENGTH_SHORT).show();
+                                    if(lesson[which]=="打开这个新闻"){
+                                        Log.v("MainActivity","rcDIANJI"+position);
+                                        CollectionBean story = stories.get(position);
+                                        Intent intent = new Intent();
+                                        intent.putExtra("story_title",story.getStory_title());
+                                        intent.putExtra("story_imag",story.getStory_imag());
+                                        intent.putExtra("story_url", story.getStory_url());
+                                        intent.putExtra("story_id",story.getId());
+                                        intent.setClass(context, webActivity.class);
+                                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK );
+                                        context.startActivity(intent);
+                                    }
+                                    else {
+                                        DBDao.getInstance().delete(story.getStory_title());
+                                        stories.clear();
+                                        stories=DBDao.getInstance().query();
+                                        Collections.reverse(stories);
+                                        notifyDataSetChanged();
+                                    }
+                                }
+                            }).create();
+                    alert.show();
                 }
         });
     }

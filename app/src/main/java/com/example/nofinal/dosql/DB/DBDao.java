@@ -122,5 +122,18 @@ public class DBDao {
         return list;
     }
 
+
+    public long delete(String name) {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        try {
+            db.beginTransaction();
+            int result = db.delete("collectionNews", "story_title = ?", new String[] { name });
+            db.setTransactionSuccessful();
+            return result;
+        } finally {
+            db.endTransaction();
+        }
+    }
+
 }
 
