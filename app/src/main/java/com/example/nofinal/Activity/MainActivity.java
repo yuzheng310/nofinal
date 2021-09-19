@@ -103,9 +103,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
  *   3.侧滑菜单每一个item都有相应的回应
  * **************************************************************************************
  *
- *
- * update 2021.8.17
- * by yuzheng
  */
 public class MainActivity extends AppCompatActivity implements Serializable {
     private Context context;

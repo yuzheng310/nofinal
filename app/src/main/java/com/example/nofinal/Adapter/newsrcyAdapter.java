@@ -104,7 +104,10 @@ public class newsrcyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             });
         }
         else {
-            ((VH2)holder).date.setText(date);
+            if(date=="最新消息"){
+                ((VH2)holder).date.setText(date);
+            }
+            else ((VH2)holder).date.setText("最早浏览过"+date);
             ((VH2)holder).title.setText(story.getTitle());
             if (story.getImages() != null && story.getImages().size() > 0) {
                 Glide.with(context)
